@@ -6,7 +6,7 @@ I'm a backend-leaning full-stack engineer who builds production web systems — 
 
 #### Recently contributing to
 {{range recentPullRequests 30 -}}
-{{if and (eq .State "MERGED") (not .Repo.IsPrivate) -}}
+{{if eq .State "MERGED" -}}
 - [{{.Title}}]({{.URL}}) — [{{.Repo.Name}}]({{.Repo.URL}}) · _{{humanize .CreatedAt}}_
 {{end -}}
 {{end -}}
