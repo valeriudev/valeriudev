@@ -6,4 +6,5 @@ I'm a backend-leaning full-stack engineer who builds production web systems — 
 
 #### What I've been building lately
 - [valeriudev/aidd-boilerplate](https://github.com/valeriudev/aidd-boilerplate) — Boilerplate to start AI Driven Development projects quick and reliable · _1 month ago_
-- [valeriudev/ml-research](https://github.com/valeriudev/ml-research) — ML Study - Practical Exercises Archive · _7 months ago_
+
+
