@@ -9,10 +9,6 @@ I'm a backend-leaning full-stack engineer who builds production web systems — 
 {{range recentContributions 4 -}}
 - [{{.Repo.Name}}]({{.Repo.URL}}){{if .Repo.Description}} — {{.Repo.Description}}{{end}} · _{{humanize .OccurredAt}}_
 {{end}}
-#### Recent pull requests
-{{range recentPullRequests 5 -}}
-- [{{.Title}}]({{.URL}}) in [{{.Repo.Name}}]({{.Repo.URL}}) · `{{.State}}` · _{{humanize .CreatedAt}}_
-{{end}}
 {{/*
   Blog — uncomment this block once valeriugutu.com exposes an RSS/Atom feed,
   and point the URL at the real feed (e.g. https://valeriugutu.com/feed.xml):
