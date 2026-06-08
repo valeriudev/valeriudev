@@ -4,10 +4,12 @@ I'm a backend-leaning full-stack engineer who builds production web systems — 
 
 - PHP · Laravel · Node.js · React · Python · AWS · PostgreSQL / MySQL / ClickHouse
 
-#### What I've been building lately
-{{range recentContributions 4 -}}
-- [{{.Repo.Name}}]({{.Repo.URL}}){{if .Repo.Description}} — {{.Repo.Description}}{{end}} · _{{humanize .OccurredAt}}_
-{{end}}
+#### Recently contributing to
+{{range recentPullRequests 30 -}}
+{{if and (eq .State "MERGED") (not .Repo.IsPrivate) -}}
+- [{{.Title}}]({{.URL}}) — [{{.Repo.Name}}]({{.Repo.URL}}) · _{{humanize .CreatedAt}}_
+{{end -}}
+{{end -}}
 {{/*
   Blog — uncomment this block once valeriugutu.com exposes an RSS/Atom feed,
   and point the URL at the real feed (e.g. https://valeriugutu.com/feed.xml):

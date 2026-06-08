@@ -27,6 +27,21 @@ jobs:
           template: "templates/README.md.tpl"
           writeTo: "README.md"
 
+      - name: Tidy the rendered README
+        run: |
+          # markscribe renders through html/template, which escapes " ' + & < >
+          # in PR titles — decode them back to readable characters.
+          sed -i 's/&#34;/"/g; s/&#39;/'\''/g; s/&#43;/+/g; s/&amp;/\&/g; s/&lt;/</g; s/&gt;/>/g' README.md
+
+          # "Recently contributing to" should be OSS only. Drop any PR line whose
+          # repo belongs to me or to an NDA-bound org (these are filtered defensively;
+          # private repos can't render under the token's public_repo scope anyway).
+          sed -i -E '/github\.com\/(valeriudev|valgutu-templates|clickoutmedia)\//d' README.md
+
+          # If no contribution lines survived, remove the lonely heading so the
+          # profile never shows an empty section.
+          grep -q '^- \[' README.md || sed -i '/^#### Recently contributing to$/d' README.md
+
       - name: Commit the refreshed README
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
