@@ -1,0 +1,33 @@
+name: Update README
+
+on:
+  push:
+    branches: [master]
+  schedule:
+    - cron: "0 * * * *" # hourly, on the hour
+  workflow_dispatch: # lets you trigger a refresh manually from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  markscribe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Render README from template
+        uses: muesli/readme-scribe@master
+        env:
+          # NOT the default GITHUB_TOKEN — markscribe needs a PAT with
+          # read:user, repo:status, public_repo, read:org to read your
+          # cross-repo activity. Store it as the README_SCRIBE_TOKEN secret.
+          GITHUB_TOKEN: ${{ secrets.README_SCRIBE_TOKEN }}
+        with:
+          template: "templates/README.md.tpl"
+          writeTo: "README.md"
+
+      - name: Commit the refreshed README
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: "chore: refresh README"
