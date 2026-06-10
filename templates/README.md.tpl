@@ -5,13 +5,9 @@ I'm a backend-leaning full-stack engineer who builds production web systems — 
 - PHP · Laravel · Node.js · React · Python · AWS · PostgreSQL / MySQL / ClickHouse
 
 #### Recently contributing to
-{{range recentPullRequests 30 -}}
-{{if eq .State "MERGED" -}}
-{{- /* .CreatedAt is a placeholder — markscribe has no .MergedAt; the workflow
-       re-dates each line from the PR's real merged_at after rendering. */ -}}
-- [{{.Title}}]({{.URL}}) — [{{.Repo.Name}}]({{.Repo.URL}}) · _{{humanize .CreatedAt}}_
-{{end -}}
-{{end -}}
+{{- /* The PR list is inserted under this heading by the workflow (newest 7
+       by merge date, OSS only) — markscribe's recentPullRequests can neither
+       sort by merge time nor see past its creation-date window. */}}
 {{/*
   Blog — uncomment this block once valeriugutu.com exposes an RSS/Atom feed,
   and point the URL at the real feed (e.g. https://valeriugutu.com/feed.xml):

@@ -30,31 +30,23 @@ jobs:
       - name: Tidy the rendered README
         run: |
           # markscribe renders through html/template, which escapes " ' + & < >
-          # in PR titles — decode them back to readable characters.
+          # — decode them back (matters again once the blog RSS block goes live).
           sed -i 's/&#34;/"/g; s/&#39;/'\''/g; s/&#43;/+/g; s/&amp;/\&/g; s/&lt;/</g; s/&gt;/>/g' README.md
 
-          # "Recently contributing to" should be OSS only. Drop any PR line whose
-          # repo belongs to me or to an NDA-bound org (these are filtered defensively;
-          # private repos can't render under the token's public_repo scope anyway).
-          sed -i -E '/github\.com\/(valeriudev|valgutu-templates|clickoutmedia)\//d' README.md
-
-          # If no contribution lines survived, remove the lonely heading so the
-          # profile never shows an empty section.
-          grep -q '^- \[' README.md || sed -i '/^#### Recently contributing to$/d' README.md
-
-      - name: Re-date PR lines from merge time
+      - name: List recently merged OSS PRs
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          # markscribe only exposes .CreatedAt on pull requests, so a PR that sat
-          # in review reads older than its merge. Re-date each line from the PR's
-          # merged_at and re-sort the list so newest-merged stays on top.
+          # markscribe's recentPullRequests scans by creation date only, so a
+          # burst of work PRs pushes OSS ones out of its window and merge dates
+          # aren't available. Query merged PRs directly instead: newest 7 by
+          # merge time, OSS only (own + NDA orgs excluded), max a year old.
           python3 - <<'EOF'
-          import datetime, re, subprocess
+          import datetime, json, subprocess
 
-          PR_LINE = re.compile(
-              r'^(?P<head>- \[.*\]\(https://github\.com/(?P<owner>[^/]+)/(?P<repo>[^/]+)/pull/(?P<num>\d+)\).*· )_[^_]+_$'
-          )
+          EXCLUDE = {"valeriudev", "valgutu-templates", "clickoutmedia", "teachtalk"}
+          SHOW = 7
+          MAX_AGE_DAYS = 365  # "recently" shouldn't surface years-old merges
 
           def humanize(then, now):
               s = int((now - then).total_seconds())
@@ -67,26 +59,45 @@ jobs:
               n = s // 31536000
               return f"{n} year{'s' if n != 1 else ''} ago" if n else "just now"
 
-          now = datetime.datetime.now(datetime.timezone.utc)
-          lines = open("README.md").read().split("\n")
-          entries = []
-          for i, line in enumerate(lines):
-              m = PR_LINE.match(line)
-              if not m:
-                  continue
-              merged = subprocess.run(
-                  ["gh", "api", f"repos/{m['owner']}/{m['repo']}/pulls/{m['num']}",
-                   "--jq", ".merged_at"],
-                  capture_output=True, text=True).stdout.strip()
-              if not merged or merged == "null":
-                  continue  # lookup failed — keep the rendered creation date
-              dt = datetime.datetime.fromisoformat(merged.replace("Z", "+00:00"))
-              entries.append((i, f"{m['head']}_{humanize(dt, now)}_", dt))
+          # Search can't sort by merge date; sort=updated over a 30-deep window
+          # is a safe superset — we re-order by the real merged_at below. The
+          # org exclusions are repeated in the query so noise from excluded
+          # orgs can't eat the window.
+          query = "type:pr author:valeriudev is:merged " + \
+                  " ".join(f"-user:{owner}" for owner in sorted(EXCLUDE))
+          data = json.loads(subprocess.run(
+              ["gh", "api", "-X", "GET", "search/issues", "-f", f"q={query}",
+               "-f", "sort=updated", "-f", "order=desc", "-F", "per_page=30"],
+              capture_output=True, text=True, check=True).stdout)
 
-          slots = [i for i, _, _ in entries]
-          for slot, (_, line, _) in zip(slots, sorted(entries, key=lambda e: e[2], reverse=True)):
-              lines[slot] = line
-          open("README.md", "w").write("\n".join(lines))
+          now = datetime.datetime.now(datetime.timezone.utc)
+          prs = []
+          for it in data["items"]:
+              repo = it["repository_url"].split("/repos/")[-1]
+              if repo.split("/")[0].lower() in EXCLUDE:  # defense in depth
+                  continue
+              merged = (it.get("pull_request") or {}).get("merged_at")
+              if not merged:
+                  continue
+              dt = datetime.datetime.fromisoformat(merged.replace("Z", "+00:00"))
+              if (now - dt).days > MAX_AGE_DAYS:
+                  continue
+              prs.append((dt, it["title"].strip(), it["html_url"], repo))
+          prs.sort(key=lambda p: p[0], reverse=True)
+
+          lines = []
+          for dt, title, url, repo in prs[:SHOW]:
+              title = title.replace("[", "\\[").replace("]", "\\]")
+              lines.append(f"- [{title}]({url}) — [{repo}](https://github.com/{repo})"
+                           f" · _{humanize(dt, now)}_")
+
+          anchor = "#### Recently contributing to"
+          text = open("README.md").read()
+          if lines:
+              text = text.replace(anchor, anchor + "\n" + "\n".join(lines), 1)
+          else:
+              text = text.replace(anchor + "\n", "", 1)  # never show an empty section
+          open("README.md", "w").write(text)
           EOF
 
       - name: Commit the refreshed README
