@@ -4,7 +4,7 @@ on:
   push:
     branches: [master]
   schedule:
-    - cron: "0 * * * *" # hourly, on the hour
+    - cron: "17 */6 * * *" # every 6 hours at :17 (off-peak minute — on-the-hour ticks get throttled)
   workflow_dispatch: # lets you trigger a refresh manually from the Actions tab
 
 permissions:
