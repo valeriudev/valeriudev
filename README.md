@@ -5,7 +5,7 @@ I'm a backend-leaning full-stack engineer who builds production web systems — 
 - PHP · Laravel · Node.js · React · Python · AWS · PostgreSQL / MySQL / ClickHouse
 
 #### Recently contributing to
-- [fix(ai): stop emitting duplicate TOOL_CALL_END for server-executed tools](https://github.com/TanStack/ai/pull/696) — [TanStack/ai](https://github.com/TanStack/ai) · _8 hours ago_
-- [Foundation skeleton: Dockerized Payload v3 LMS starter (initial release)](https://github.com/lyceumjs/starter-kit/pull/1) — [lyceumjs/starter-kit](https://github.com/lyceumjs/starter-kit) · _16 hours ago_
-- [Lyceum engine: foundation + example smoke harness](https://github.com/lyceumjs/lyceum/pull/1) — [lyceumjs/lyceum](https://github.com/lyceumjs/lyceum) · _16 hours ago_
+- [fix(ai): stop emitting duplicate TOOL_CALL_END for server-executed tools](https://github.com/TanStack/ai/pull/696) — [TanStack/ai](https://github.com/TanStack/ai) · _13 hours ago_
+- [Foundation skeleton: Dockerized Payload v3 LMS starter (initial release)](https://github.com/lyceumjs/starter-kit/pull/1) — [lyceumjs/starter-kit](https://github.com/lyceumjs/starter-kit) · _21 hours ago_
+- [Lyceum engine: foundation + example smoke harness](https://github.com/lyceumjs/lyceum/pull/1) — [lyceumjs/lyceum](https://github.com/lyceumjs/lyceum) · _21 hours ago_
 
