@@ -42,6 +42,53 @@ jobs:
           # profile never shows an empty section.
           grep -q '^- \[' README.md || sed -i '/^#### Recently contributing to$/d' README.md
 
+      - name: Re-date PR lines from merge time
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # markscribe only exposes .CreatedAt on pull requests, so a PR that sat
+          # in review reads older than its merge. Re-date each line from the PR's
+          # merged_at and re-sort the list so newest-merged stays on top.
+          python3 - <<'EOF'
+          import datetime, re, subprocess
+
+          PR_LINE = re.compile(
+              r'^(?P<head>- \[.*\]\(https://github\.com/(?P<owner>[^/]+)/(?P<repo>[^/]+)/pull/(?P<num>\d+)\).*· )_[^_]+_$'
+          )
+
+          def humanize(then, now):
+              s = int((now - then).total_seconds())
+              for size, unit, cap in ((60, "minute", 60), (3600, "hour", 24),
+                                      (86400, "day", 7), (604800, "week", 5),
+                                      (2592000, "month", 13)):
+                  n = s // size
+                  if 0 < n < cap:
+                      return f"{n} {unit}{'s' if n != 1 else ''} ago"
+              n = s // 31536000
+              return f"{n} year{'s' if n != 1 else ''} ago" if n else "just now"
+
+          now = datetime.datetime.now(datetime.timezone.utc)
+          lines = open("README.md").read().split("\n")
+          entries = []
+          for i, line in enumerate(lines):
+              m = PR_LINE.match(line)
+              if not m:
+                  continue
+              merged = subprocess.run(
+                  ["gh", "api", f"repos/{m['owner']}/{m['repo']}/pulls/{m['num']}",
+                   "--jq", ".merged_at"],
+                  capture_output=True, text=True).stdout.strip()
+              if not merged or merged == "null":
+                  continue  # lookup failed — keep the rendered creation date
+              dt = datetime.datetime.fromisoformat(merged.replace("Z", "+00:00"))
+              entries.append((i, f"{m['head']}_{humanize(dt, now)}_", dt))
+
+          slots = [i for i, _, _ in entries]
+          for slot, (_, line, _) in zip(slots, sorted(entries, key=lambda e: e[2], reverse=True)):
+              lines[slot] = line
+          open("README.md", "w").write("\n".join(lines))
+          EOF
+
       - name: Commit the refreshed README
         uses: stefanzweifel/git-auto-commit-action@v7
         with:

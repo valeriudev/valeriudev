@@ -7,6 +7,8 @@ I'm a backend-leaning full-stack engineer who builds production web systems — 
 #### Recently contributing to
 {{range recentPullRequests 30 -}}
 {{if eq .State "MERGED" -}}
+{{- /* .CreatedAt is a placeholder — markscribe has no .MergedAt; the workflow
+       re-dates each line from the PR's real merged_at after rendering. */ -}}
 - [{{.Title}}]({{.URL}}) — [{{.Repo.Name}}]({{.Repo.URL}}) · _{{humanize .CreatedAt}}_
 {{end -}}
 {{end -}}
