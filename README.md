@@ -5,11 +5,11 @@ I'm a backend-leaning full-stack engineer who builds production web systems — 
 - PHP · Laravel · Node.js · React · Python · AWS · PostgreSQL / MySQL / ClickHouse
 
 #### Recently contributing to
-- [Merge develop into master: open-history book sort, dev hot-reload, Postgres MCP](https://github.com/lexiprep/lexiprep/pull/6) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _13 minutes ago_
-- [Move Stats to its own page; chart legend toggling](https://github.com/lexiprep/lexiprep/pull/5) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _21 hours ago_
-- [Vocabulary stats, growth charts, and cleanup](https://github.com/lexiprep/lexiprep/pull/4) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _21 hours ago_
+- [Remove stray amiable-modal.png screenshot](https://github.com/lexiprep/lexiprep/pull/8) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _6 hours ago_
+- [Merge develop into master: word-modal book source line](https://github.com/lexiprep/lexiprep/pull/7) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _8 hours ago_
+- [Merge develop into master: open-history book sort, dev hot-reload, Postgres MCP](https://github.com/lexiprep/lexiprep/pull/6) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _9 hours ago_
+- [Move Stats to its own page; chart legend toggling](https://github.com/lexiprep/lexiprep/pull/5) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _1 day ago_
+- [Vocabulary stats, growth charts, and cleanup](https://github.com/lexiprep/lexiprep/pull/4) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _1 day ago_
 - [Engine noise cleanup + per-book reprocess](https://github.com/lexiprep/lexiprep/pull/3) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _1 day ago_
 - [Support PDF uploads](https://github.com/lexiprep/lexiprep/pull/2) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _1 day ago_
-- [Add Caddy reverse proxy for production](https://github.com/lexiprep/lexiprep/pull/1) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _1 day ago_
-- [chore(ai-event-client): drop unused @tanstack/ai peerDependency](https://github.com/TanStack/ai/pull/694) — [TanStack/ai](https://github.com/TanStack/ai) · _3 days ago_
 
