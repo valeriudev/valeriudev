@@ -11,5 +11,5 @@ I'm a backend-leaning full-stack engineer who builds production web systems — 
 - [Move Stats to its own page; chart legend toggling](https://github.com/lexiprep/lexiprep/pull/5) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _2 days ago_
 - [Vocabulary stats, growth charts, and cleanup](https://github.com/lexiprep/lexiprep/pull/4) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _2 days ago_
 - [Engine noise cleanup + per-book reprocess](https://github.com/lexiprep/lexiprep/pull/3) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _2 days ago_
-- [Support PDF uploads](https://github.com/lexiprep/lexiprep/pull/2) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _2 days ago_
+- [Support PDF uploads](https://github.com/lexiprep/lexiprep/pull/2) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _3 days ago_
 
