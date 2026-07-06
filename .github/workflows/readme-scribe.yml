@@ -55,8 +55,10 @@ jobs:
           # the list only surfaces contributions to third-party repos. Fetched
           # at run time (README_SCRIBE_TOKEN has read:org) so it never goes stale
           # as new orgs appear.
+          # -X GET is required: gh switches to POST once a -F field is present.
           EXCLUDE = {"valeriudev"} | {
-              o["login"].lower() for o in gh_json("user/orgs", "-F", "per_page=100")
+              o["login"].lower()
+              for o in gh_json("user/orgs", "-X", "GET", "-F", "per_page=100")
           }
           # The highest-volume own/NDA orgs are also excluded in the search query
           # so a burst of their PRs can't eat the window before an OSS one shows;
