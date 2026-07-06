@@ -6,10 +6,7 @@ I'm a backend-leaning full-stack engineer who builds production web systems — 
 
 #### Recently contributing to
 - [\[Server\] Allow pre-built instance handlers in element registration](https://github.com/modelcontextprotocol/php-sdk/pull/375) — [modelcontextprotocol/php-sdk](https://github.com/modelcontextprotocol/php-sdk) · _21 hours ago_
-- [Add daily card review (spaced repetition)](https://github.com/lexiprep/lexiprep/pull/9) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _6 days ago_
-- [Remove stray amiable-modal.png screenshot](https://github.com/lexiprep/lexiprep/pull/8) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _1 week ago_
-- [Merge develop into master: word-modal book source line](https://github.com/lexiprep/lexiprep/pull/7) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _1 week ago_
-- [Merge develop into master: open-history book sort, dev hot-reload, Postgres MCP](https://github.com/lexiprep/lexiprep/pull/6) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _1 week ago_
-- [Move Stats to its own page; chart legend toggling](https://github.com/lexiprep/lexiprep/pull/5) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _1 week ago_
-- [Vocabulary stats, growth charts, and cleanup](https://github.com/lexiprep/lexiprep/pull/4) — [lexiprep/lexiprep](https://github.com/lexiprep/lexiprep) · _1 week ago_
+- [chore(ai-event-client): drop unused @tanstack/ai peerDependency](https://github.com/TanStack/ai/pull/694) — [TanStack/ai](https://github.com/TanStack/ai) · _1 week ago_
+- [fix(ai-client): settle status to ready on a message-less terminal run (#421)](https://github.com/TanStack/ai/pull/749) — [TanStack/ai](https://github.com/TanStack/ai) · _1 week ago_
+- [fix(ai): stop emitting duplicate TOOL_CALL_END for server-executed tools](https://github.com/TanStack/ai/pull/696) — [TanStack/ai](https://github.com/TanStack/ai) · _3 weeks ago_
 
