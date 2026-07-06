@@ -35,7 +35,9 @@ jobs:
 
       - name: List recently merged OSS PRs
         env:
-          GH_TOKEN: ${{ github.token }}
+          # README_SCRIBE_TOKEN (has read:org) so we can list the user's orgs
+          # below — the default GITHUB_TOKEN can't read cross-org membership.
+          GH_TOKEN: ${{ secrets.README_SCRIBE_TOKEN }}
         run: |
           # markscribe's recentPullRequests scans by creation date only, so a
           # burst of work PRs pushes OSS ones out of its window and merge dates
@@ -44,7 +46,22 @@ jobs:
           python3 - <<'EOF'
           import datetime, json, subprocess
 
-          EXCLUDE = {"valeriudev", "valgutu-templates", "clickoutmedia", "teachtalk"}
+          def gh_json(*args):
+              out = subprocess.run(["gh", "api", *args],
+                                   capture_output=True, text=True, check=True).stdout
+              return json.loads(out)
+
+          # Exclude the personal account plus every org the user belongs to, so
+          # the list only surfaces contributions to third-party repos. Fetched
+          # at run time (README_SCRIBE_TOKEN has read:org) so it never goes stale
+          # as new orgs appear.
+          EXCLUDE = {"valeriudev"} | {
+              o["login"].lower() for o in gh_json("user/orgs", "-F", "per_page=100")
+          }
+          # The highest-volume own/NDA orgs are also excluded in the search query
+          # so a burst of their PRs can't eat the window before an OSS one shows;
+          # the full EXCLUDE set is still enforced client-side below.
+          QUERY_EXCLUDE = ["valeriudev", "clickoutmedia", "teachtalk", "valgutu-templates"]
           SHOW = 7
           MAX_AGE_DAYS = 365  # "recently" shouldn't surface years-old merges
 
@@ -59,15 +76,15 @@ jobs:
               n = s // 31536000
               return f"{n} year{'s' if n != 1 else ''} ago" if n else "just now"
 
-          # Search can't sort by merge date; sort=updated over a 30-deep window
-          # is a safe superset — we re-order by the real merged_at below. The
-          # org exclusions are repeated in the query so noise from excluded
-          # orgs can't eat the window.
+          # Search can't sort by merge date; sort=updated over a 100-deep window
+          # is a safe superset — we re-order by the real merged_at below. Only the
+          # high-volume orgs go in the query (a dozen -user: terms would blow the
+          # query-length limit); the rest are filtered client-side below.
           query = "type:pr author:valeriudev is:merged " + \
-                  " ".join(f"-user:{owner}" for owner in sorted(EXCLUDE))
+                  " ".join(f"-user:{owner}" for owner in QUERY_EXCLUDE)
           data = json.loads(subprocess.run(
               ["gh", "api", "-X", "GET", "search/issues", "-f", f"q={query}",
-               "-f", "sort=updated", "-f", "order=desc", "-F", "per_page=30"],
+               "-f", "sort=updated", "-f", "order=desc", "-F", "per_page=100"],
               capture_output=True, text=True, check=True).stdout)
 
           now = datetime.datetime.now(datetime.timezone.utc)
