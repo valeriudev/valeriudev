@@ -1,4 +1,4 @@
-### Hi, I'm Valery
+### Hi, I'm Valeriu
 
 I'm a backend-leaning full-stack engineer who builds production web systems — mostly **PHP / Laravel** and **Node.js**, with a growing focus on **AI / LLM** tooling and the **Model Context Protocol**.
 
