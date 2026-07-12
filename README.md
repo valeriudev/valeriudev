@@ -5,7 +5,7 @@ I'm a backend-leaning full-stack engineer who builds production web systems — 
 - PHP · Laravel · Node.js · React · Python · AWS · PostgreSQL / MySQL / ClickHouse
 
 #### Recently contributing to
-- [\[Server\] Allow pre-built instance handlers in element registration](https://github.com/modelcontextprotocol/php-sdk/pull/375) — [modelcontextprotocol/php-sdk](https://github.com/modelcontextprotocol/php-sdk) · _5 days ago_
+- [\[Server\] Allow pre-built instance handlers in element registration](https://github.com/modelcontextprotocol/php-sdk/pull/375) — [modelcontextprotocol/php-sdk](https://github.com/modelcontextprotocol/php-sdk) · _6 days ago_
 - [chore(ai-event-client): drop unused @tanstack/ai peerDependency](https://github.com/TanStack/ai/pull/694) — [TanStack/ai](https://github.com/TanStack/ai) · _2 weeks ago_
 - [fix(ai-client): settle status to ready on a message-less terminal run (#421)](https://github.com/TanStack/ai/pull/749) — [TanStack/ai](https://github.com/TanStack/ai) · _2 weeks ago_
 - [fix(ai): stop emitting duplicate TOOL_CALL_END for server-executed tools](https://github.com/TanStack/ai/pull/696) — [TanStack/ai](https://github.com/TanStack/ai) · _4 weeks ago_
