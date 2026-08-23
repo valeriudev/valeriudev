@@ -5,7 +5,7 @@ I'm a backend-leaning full-stack engineer who builds production web systems — 
 - PHP · Laravel · Node.js · React · Python · AWS · PostgreSQL / MySQL / ClickHouse
 
 #### Recently contributing to
-- [\[Schema\]\[Server\] Preserve request id in JSON-RPC error responses instead of fabricating id:""](https://github.com/modelcontextprotocol/php-sdk/pull/379) — [modelcontextprotocol/php-sdk](https://github.com/modelcontextprotocol/php-sdk) · _4 days ago_
+- [\[Schema\]\[Server\] Preserve request id in JSON-RPC error responses instead of fabricating id:""](https://github.com/modelcontextprotocol/php-sdk/pull/379) — [modelcontextprotocol/php-sdk](https://github.com/modelcontextprotocol/php-sdk) · _5 days ago_
 - [\[Server\] Always emit `items` for array tool parameter schemas](https://github.com/modelcontextprotocol/php-sdk/pull/378) — [modelcontextprotocol/php-sdk](https://github.com/modelcontextprotocol/php-sdk) · _1 month ago_
 - [\[Server\] Allow pre-built instance handlers in element registration](https://github.com/modelcontextprotocol/php-sdk/pull/375) — [modelcontextprotocol/php-sdk](https://github.com/modelcontextprotocol/php-sdk) · _1 month ago_
 - [chore(ai-event-client): drop unused @tanstack/ai peerDependency](https://github.com/TanStack/ai/pull/694) — [TanStack/ai](https://github.com/TanStack/ai) · _2 months ago_
