@@ -5,7 +5,7 @@ I'm a backend-leaning full-stack engineer who builds production web systems — 
 - PHP · Laravel · Node.js · React · Python · AWS · PostgreSQL / MySQL / ClickHouse
 
 #### Recently contributing to
-- [feat(websocket): support custom HTTP agents](https://github.com/deepgram/deepgram-js-sdk/pull/504) — [deepgram/deepgram-js-sdk](https://github.com/deepgram/deepgram-js-sdk) · _2 days ago_
+- [feat(websocket): support custom HTTP agents](https://github.com/deepgram/deepgram-js-sdk/pull/504) — [deepgram/deepgram-js-sdk](https://github.com/deepgram/deepgram-js-sdk) · _3 days ago_
 - [fix(listen): reject Nova-3 keywords before connecting](https://github.com/deepgram/deepgram-js-sdk/pull/505) — [deepgram/deepgram-js-sdk](https://github.com/deepgram/deepgram-js-sdk) · _3 days ago_
 - [\[Schema\]\[Server\] Preserve request id in JSON-RPC error responses instead of fabricating id:""](https://github.com/modelcontextprotocol/php-sdk/pull/379) — [modelcontextprotocol/php-sdk](https://github.com/modelcontextprotocol/php-sdk) · _2 weeks ago_
 - [\[Server\] Always emit `items` for array tool parameter schemas](https://github.com/modelcontextprotocol/php-sdk/pull/378) — [modelcontextprotocol/php-sdk](https://github.com/modelcontextprotocol/php-sdk) · _1 month ago_
